@@ -65,14 +65,6 @@ const Activities = () => {
         console.log('Close');
         setShowActivityOpen(false);
   }
-  
-  const addActivity = (data) => {
-    console.log("Add Act");
-    const NewList = [...activities, data
-//      {time: "2021-03-18 10:30", name: "WOD", gym: "Hemma", booked: 5}
-    ];
-    setActivities(NewList);
-  }
 
   const act = activities.map((a, index) => (
     <tr key={index} data-id={index} onClick={handleShowActivity}>
