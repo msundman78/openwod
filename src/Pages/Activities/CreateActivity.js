@@ -24,7 +24,14 @@ export default function CreateActivity({addActivity}) {
   };
 
   const handleCreate = (data) => {
-    addActivity(formData);
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData)
+    };
+    fetch('http://localhost:3000/activities', requestOptions)
+      .then(response => response.json())
+      .then(data => addActivity());
     setOpen(false);
   };
 

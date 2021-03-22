@@ -1,5 +1,5 @@
 import React from 'react';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import { makeStyles } from '@material-ui/core/styles';
@@ -32,23 +32,32 @@ const useStyles = makeStyles({
   },
 });
 
-const listActivities = [
-  {time: "2021-03-15 10:30", name: "WOD", gym: "Grottan", booked: 3},
-  {time: "2021-03-16 10:30", name: "WOD", gym: "Grottan", booked: 4},
-  {time: "2021-03-17 10:30", name: "WOD", gym: "Utegymmet", booked: 5}  
-];
-
 const Activities = () => {
-  const [actState, setActState] = useState(listActivities);
+  const [activities, setActivities] = useState([]);
   const [showActivityOpen, setShowActivityOpen] = useState(false);
   const [showActivityData, setShowActivityData] = useState(false);
 
   const classes = useStyles();
 
+  const fetchActivities = () => {
+    console.log("fetchActivities");
+    fetch("http://localhost:3000/activities")
+    .then(res => res.json())
+    .then(
+      (result) => {
+        setActivities(result);
+      }
+    )
+  }
+  
+  useEffect(() => {
+    fetchActivities();
+  }, [])
+
   const handleShowActivity = (e) => {
     console.log(e.currentTarget.dataset.id)
-    console.log(actState[e.currentTarget.dataset.id]);
-    setShowActivityData(actState[e.currentTarget.dataset.id]);
+    console.log(activities[e.currentTarget.dataset.id]);
+    setShowActivityData(activities[e.currentTarget.dataset.id]);
     setShowActivityOpen(true);
   }
 
@@ -59,13 +68,13 @@ const Activities = () => {
   
   const addActivity = (data) => {
     console.log("Add Act");
-    const NewList = [...actState, data
+    const NewList = [...activities, data
 //      {time: "2021-03-18 10:30", name: "WOD", gym: "Hemma", booked: 5}
     ];
-    setActState(NewList);
+    setActivities(NewList);
   }
 
-  const act = actState.map((a, index) => (
+  const act = activities.map((a, index) => (
     <tr key={index} data-id={index} onClick={handleShowActivity}>
       <td>{a.time}</td>
       <td>{a.name}</td>
@@ -96,7 +105,7 @@ const Activities = () => {
       </Card>
       <br />
         <ShowActivityModal open={showActivityOpen} data={showActivityData} handleClose={handleCloseShowActivity} />
-        <CreateActivity addActivity={addActivity}/>
+        <CreateActivity addActivity={fetchActivities}/>
     </div>
   );
 }

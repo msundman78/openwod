@@ -1,0 +1,17 @@
+body {
+  background: #a9b17121;
+}
+
+.form {
+  max-width: 300px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  padding: 20px;
+  margin-top: 30px;
+}
+
+.form .login-button {
+  margin-top: 50px;
+}

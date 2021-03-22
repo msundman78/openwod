@@ -68,10 +68,14 @@ const InputBoxDynamic = (props) => {
   );
 }
 
-const Name = (props) => {
+const Gyms = (props) => {
  
   return (
     <div>
+      <h1>Under Construction</h1>
+      <p>Gyms page is currently not implemented. This is a test page showing
+      three different ways to update a State from a form.</p>
+      <hr />
       <OutputName name={props.name}/> <hr />
       <InputBoxOnSubmitLocalState updateName={props.updateName}/> <hr />
       <InputBoxOnSubmitUseRef updateName={props.updateName}/> <hr />
@@ -80,4 +84,4 @@ const Name = (props) => {
   );
 }
 
-export default Name;
+export default Gyms;
