@@ -5,14 +5,17 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { KeyboardDateTimePicker } from '@material-ui/pickers';
 
- const CreateActivity = ({addActivity}) => {
+
+const CreateActivity = ({addActivity}) => {
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     gym: '',
     desc: '',
-    time: ''
+    booked: 0,
+    time: new Date()
   });
 
   const handleClickOpen = () => {
@@ -36,7 +39,14 @@ import DialogTitle from '@material-ui/core/DialogTitle';
   };
 
   const updateFormData = (e) => {
+    console.log(e);
     const newFormData = {...formData, [e.target.id]: e.target.value};
+    setFormData(newFormData);
+  };
+
+  const handleDateChange = (e) => {
+    console.log(e);
+    const newFormData = {...formData, time: e};
     setFormData(newFormData);
   };
 
@@ -51,7 +61,16 @@ import DialogTitle from '@material-ui/core/DialogTitle';
           <TextField margin="dense" id="gym" label="Gym Name" value={formData.gym} onChange={updateFormData} fullWidth autoFocus/>
           <TextField margin="dense" id="name" label="Activity Name" value={formData.name} onChange={updateFormData} fullWidth />
           <TextField margin="dense" id="desc" label="Description" value={formData.desc} onChange={updateFormData}multiline rows={4} fullWidth />
-          <TextField margin="dense" id="time" label="Datum" value={formData.time} onChange={updateFormData} fullWidth />
+            <KeyboardDateTimePicker
+              id="time"
+              variant="inline"
+              label="Start Time"
+              value={formData.time} 
+              onChange={handleDateChange}
+              format="yyyy-MM-dd HH:mm"
+              ampm={false}
+              disablePast={true}
+            />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">Cancel</Button>

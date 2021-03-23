@@ -3,8 +3,18 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import format from "date-fns/format";
+import isValid from 'date-fns/isValid';
+import parseJSON from 'date-fns/parseJSON';
 
  const ShowActivityModal = (props) => {
+
+  var actTime;
+  if (isValid(parseJSON(props.data.time))) {
+    actTime = format(parseJSON(props.data.time), 'iii d/M HH:mm');
+  } else {
+    actTime = props.data.time;
+  }
 
   return (
     <div>
@@ -14,7 +24,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
           <div className="activity">
             <div><b>Gym:</b> {props.data.gym}</div>
             <div><b>Name:</b> {props.data.name}</div>
-            <div><b>Time:</b> {props.data.time}</div>
+            <div><b>Time:</b> {actTime}</div>
             <div className="line-wrap"><b>Description:</b><br /> {props.data.desc}</div>
           </div>
         </DialogContent>

@@ -5,6 +5,9 @@ import {useState, useEffect} from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import { makeStyles } from '@material-ui/core/styles';
+import format from "date-fns/format";
+import isValid from 'date-fns/isValid';
+import parseJSON from 'date-fns/parseJSON';
 
 import CreateActivity from './CreateActivity';
 import ShowActivityModal from './ShowActivityModal';
@@ -53,7 +56,7 @@ const Activities = () => {
 
   const act = activities.map((a, index) => (
     <tr key={index} data-id={index} onClick={handleShowActivity}>
-      <td>{a.time}</td>
+      <td>{isValid(parseJSON(a.time)) ? format(parseJSON(a.time), 'iii d/M HH:mm') : a.time}</td>
       <td>{a.name}</td>
       <td>{a.gym}</td>
       <td>{a.booked}</td>
