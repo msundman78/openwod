@@ -10,7 +10,7 @@ const OutputName = (props) => {
 }
 
 const InputBoxOnSubmitLocalState = (props) => {
-  const [ localName, setLocalName ] = useState("Your Name");
+  const [localName, setLocalName] = useState("Your Name");
 
   const handleSubmit = (e) => {
     e.preventDefault();       // Prevent Default action to block page reload on submit
@@ -38,7 +38,7 @@ const InputBoxOnSubmitUseRef = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();                   // Prevent Default action to block page reload on submit
     props.setName(nameRef.current.value); // Update upstream State
-    nameRef.current.value="";             // Clear Input box
+    nameRef.current.value='';             // Clear Input box
   }
   
   return (

@@ -6,11 +6,11 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
-import Activities from "./Pages/Activities/Activities"
-import Gyms from "./Pages/Gyms/Gyms";
-import Members from "./Pages/Members/Members";
-import Login from "./Pages/Login/Login";
-import BottomNav from "./BottomNav";
+import Activities from './Pages/Activities/Activities';
+import Gyms from './Pages/Gyms/Gyms';
+import Members from './Pages/Members/Members';
+import Login from './Pages/Login/Login';
+import BottomNav from './BottomNav';
 
 
 function App() {
@@ -21,9 +21,9 @@ function App() {
       <Route {...rest} render={() => {
         return isLoggedIn === true
           ? children
-          : <Redirect to='/login' />
+          : <Redirect to="/login" />
       }} />
-    )
+    );
   }
 
   return (

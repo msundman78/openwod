@@ -4,7 +4,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-export default function ShowActivityModal(props) {
+ const ShowActivityModal = (props) => {
 
   return (
     <div>
@@ -25,3 +25,4 @@ export default function ShowActivityModal(props) {
     </div>
   );
 }
+export default ShowActivityModal;

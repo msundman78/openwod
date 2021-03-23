@@ -6,7 +6,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-export default function CreateActivity({addActivity}) {
+ const CreateActivity = ({addActivity}) => {
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -29,7 +29,7 @@ export default function CreateActivity({addActivity}) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData)
     };
-    fetch('https://openwod-api.azurewebsites.net/activities', requestOptions)
+    fetch(process.env.REACT_APP_OPENWOD_API_URL + '/activities', requestOptions)
       .then(response => response.json())
       .then(data => addActivity());
     setOpen(false);
@@ -38,7 +38,7 @@ export default function CreateActivity({addActivity}) {
   const updateFormData = (e) => {
     const newFormData = {...formData, [e.target.id]: e.target.value};
     setFormData(newFormData);
-  }
+  };
 
   return (
     <div>
@@ -61,3 +61,5 @@ export default function CreateActivity({addActivity}) {
     </div>
   );
 }
+
+export default CreateActivity;

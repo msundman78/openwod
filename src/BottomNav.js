@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import {useState} from 'react';
+import {Link} from 'react-router-dom';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import ListIcon from '@material-ui/icons/List';
@@ -10,11 +10,10 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { makeStyles } from '@material-ui/core/styles';
 
 const BottomNav = (props) => {
-  const [value, setValue] = useState(0);
+  const [currentNavID, setCurrentNavID] = useState(0);
   
   const useStyles = makeStyles({
     root: {
-      /* width: 500, */
       width: '100%',
       position: 'fixed',
       bottom: 0,
@@ -27,9 +26,9 @@ const BottomNav = (props) => {
   return (
     <div>
       <BottomNavigation
-        value={value}
+        value={currentNavID}
         onChange={(event, newValue) => {
-          setValue(newValue);
+          setCurrentNavID(newValue);
         }}
         showLabels
         className={classes.root}

@@ -15,7 +15,7 @@ const useStyles = makeStyles({
   },
   content: {
     padding: 0,
-    "&:last-child": {
+    '&:last-child': {
       paddingBottom: 0
     }
   },
@@ -28,7 +28,8 @@ const Activities = () => {
   const classes = useStyles();
 
   const fetchActivities = () => {
-    fetch("https://openwod-api.azurewebsites.net/activities")
+    console.log(process.env.REACT_APP_OPENWOD_API_URL + '/activities');
+    fetch(process.env.REACT_APP_OPENWOD_API_URL + '/activities')
     .then(res => res.json())
     .then(
       (result) => {

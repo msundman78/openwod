@@ -1,7 +1,7 @@
 import './Login.css';
 import React from 'react';
 import { useState } from 'react';
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -42,7 +42,6 @@ const Login = (props) => {
       </form>
     </div>
   );
-
 }
 
 export default Login;
