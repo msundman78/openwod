@@ -13,9 +13,9 @@ const InputBoxOnSubmitLocalState = (props) => {
   const [ localName, setLocalName ] = useState("Your Name");
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent Default action to block page reload on submit
-    props.updateName(localName); // Update upstream State
-    setLocalName(""); // Clear Input box
+    e.preventDefault();       // Prevent Default action to block page reload on submit
+    props.setName(localName); // Update upstream State
+    setLocalName("");         // Clear Input box
   }
   
   return (
@@ -36,9 +36,9 @@ const InputBoxOnSubmitUseRef = (props) => {
   const nameRef = useRef();
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent Default action to block page reload on submit
-    props.updateName(nameRef.current.value); // Update upstream State
-    nameRef.current.value=""; // Clear Input box
+    e.preventDefault();                   // Prevent Default action to block page reload on submit
+    props.setName(nameRef.current.value); // Update upstream State
+    nameRef.current.value="";             // Clear Input box
   }
   
   return (
@@ -62,24 +62,25 @@ const InputBoxDynamic = (props) => {
       <p><b>Dynamically update upstream state onChange:</b></p>
       <div>
         <label htmlFor="nameDynamic">Name: </label>
-        <input id="nameDynamic" value={props.name} onChange={(e) => props.updateName(e.target.value)}/>
+        <input id="nameDynamic" value={props.name} onChange={(e) => props.setName(e.target.value)}/>
       </div>
     </div>
   );
 }
 
 const Gyms = (props) => {
- 
+  const [name, setName] = useState("My Name");
+  
   return (
     <div>
       <h1>Under Construction</h1>
       <p>Gyms page is currently not implemented. This is a test page showing
       three different ways to update a State from a form.</p>
       <hr />
-      <OutputName name={props.name}/> <hr />
-      <InputBoxOnSubmitLocalState updateName={props.updateName}/> <hr />
-      <InputBoxOnSubmitUseRef updateName={props.updateName}/> <hr />
-      <InputBoxDynamic name={props.name} updateName={props.updateName}/> <hr />
+      <OutputName name={name}/> <hr />
+      <InputBoxOnSubmitLocalState setName={setName}/> <hr />
+      <InputBoxOnSubmitUseRef setName={setName}/> <hr />
+      <InputBoxDynamic name={name} setName={setName}/> <hr />
     </div>
   );
 }

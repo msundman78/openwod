@@ -1,29 +1,29 @@
 import './App.css';
-import { BrowserRouter as Router, Switch, Route, Redirect, useHistory } from 'react-router-dom';
-import {useState} from 'react';
-
+import { useState } from 'react';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
-
-import BottomNav from "./BottomNav";
-import Login from "./Pages/Login/Login";
-import Logout from "./Pages/Logout";
-import Gyms from "./Pages/Gyms";
 import Activities from "./Pages/Activities/Activities"
-
+import Gyms from "./Pages/Gyms/Gyms";
+import Members from "./Pages/Members/Members";
+import Login from "./Pages/Login/Login";
+import BottomNav from "./BottomNav";
 
 
 function App() {
-  const [name, setName] = useState("Start");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  let history = useHistory();
-
-  const handleLogOut = () => {
-    setIsLoggedIn(false);
-    history.push('/login');
+ 
+  function PrivateRoute ({ children, ...rest }) {
+    return (
+      <Route {...rest} render={() => {
+        return isLoggedIn === true
+          ? children
+          : <Redirect to='/login' />
+      }} />
+    )
   }
 
   return (
@@ -37,13 +37,13 @@ function App() {
           </Toolbar>
         </AppBar>
         <Switch>
-          <Route path="/gyms"><Gyms name={name} updateName={setName}/></Route>
-          <Route path="/activities"><Activities /></Route>
-          <Route path="/login" ><Login handleLogIn={setIsLoggedIn}/></Route>
-          <Route path="/logout" ><Logout setIsLoggedIn={setIsLoggedIn}/></Route>
+          <PrivateRoute path="/activities"><Activities /></PrivateRoute>
+          <PrivateRoute path="/gyms"><Gyms /></PrivateRoute>
+          <PrivateRoute path="/members"><Members /></PrivateRoute>
+          <Route path="/login" ><Login setIsLoggedIn={setIsLoggedIn}/></Route>
           <Route path="/"><Redirect to="/login" /></Route>
         </Switch>
-        {isLoggedIn && <BottomNav handleLogOut={handleLogOut}/>}
+        {isLoggedIn && <BottomNav setIsLoggedIn={setIsLoggedIn}/>}
       </Router>
     </div>
   );

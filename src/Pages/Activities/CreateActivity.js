@@ -29,7 +29,7 @@ export default function CreateActivity({addActivity}) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData)
     };
-    fetch('http://localhost:3000/activities', requestOptions)
+    fetch('https://openwod-api.azurewebsites.net/activities', requestOptions)
       .then(response => response.json())
       .then(data => addActivity());
     setOpen(false);

@@ -38,18 +38,25 @@ const BottomNav = (props) => {
           component={Link} 
           to="/activities" 
           label="Activities" 
-          icon={<ListIcon />} />
+          icon={<ListIcon />}
+        />
         <BottomNavigationAction 
           component={Link} 
           to="/gyms" 
           label="Gyms" 
-          icon={<FitnessCenterIcon />} />
-        <BottomNavigationAction label="Members" icon={<PeopleIcon />} />
+          icon={<FitnessCenterIcon />}
+        />
         <BottomNavigationAction 
           component={Link} 
-          to="/logout" 
+          to="/members" 
+          label="Members" 
+          icon={<PeopleIcon />} 
+        />
+        <BottomNavigationAction 
+          onClick={() => props.setIsLoggedIn(false)}
           label="Log Out" 
-          icon={<ExitToAppIcon />} />
+          icon={<ExitToAppIcon />} 
+        />
       </BottomNavigation>
     </div>
   );

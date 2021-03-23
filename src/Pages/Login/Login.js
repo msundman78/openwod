@@ -1,11 +1,11 @@
+import './Login.css';
 import React from 'react';
-import {useState} from 'react';
+import { useState } from 'react';
 import { useHistory } from "react-router-dom";
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
-import './Login.css';
 
 const Login = (props) => {
   let history = useHistory();
@@ -21,7 +21,7 @@ const Login = (props) => {
   };
 
   const handleSubmit = () => {
-    props.handleLogIn(true);
+    props.setIsLoggedIn(true);
     history.push('/activities');
   }
 
