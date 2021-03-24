@@ -18,14 +18,6 @@ const CreateActivity = ({addActivity}) => {
     time: new Date()
   });
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
   const handleCreate = (data) => {
     const requestOptions = {
       method: 'POST',
@@ -39,23 +31,21 @@ const CreateActivity = ({addActivity}) => {
   };
 
   const updateFormData = (e) => {
-    console.log(e);
     const newFormData = {...formData, [e.target.id]: e.target.value};
     setFormData(newFormData);
   };
 
   const handleDateChange = (e) => {
-    console.log(e);
     const newFormData = {...formData, time: e};
     setFormData(newFormData);
   };
 
   return (
     <div>
-      <Button variant="contained" color="primary" onClick={handleClickOpen}>
+      <Button variant="contained" color="primary" onClick={() => setOpen(true)}>
         Create Activity
       </Button>
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+      <Dialog open={open} onClose={() => setOpen(false)} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Create Activity</DialogTitle>
         <DialogContent>
           <TextField margin="dense" id="gym" label="Gym Name" value={formData.gym} onChange={updateFormData} fullWidth autoFocus/>
@@ -73,7 +63,7 @@ const CreateActivity = ({addActivity}) => {
             />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">Cancel</Button>
+          <Button onClick={() => setOpen(false)} color="primary">Cancel</Button>
           <Button onClick={handleCreate} color="primary">Create</Button>
         </DialogActions>
       </Dialog>
